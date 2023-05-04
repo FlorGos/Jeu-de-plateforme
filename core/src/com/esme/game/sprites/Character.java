@@ -15,7 +15,7 @@ public class Character {
         this.texture = new Texture("character/BaseChara.png");
         this.position = new Vector2(x,y);
         this.fall = new Vector2(0,0);
-        this.walking = new Animation(1,0.5f); //on a pas les différentes animations du sprite :eyes:
+        this.walking = new Animation(8,0.5f); //on a pas les différentes animations du sprite :eyes:
     }
 
     public void update(float dt){

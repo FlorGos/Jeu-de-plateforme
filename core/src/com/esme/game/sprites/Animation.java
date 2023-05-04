@@ -13,8 +13,8 @@ public class Animation {
         this.textures = new Array<Texture>();
         for (int i=1; i<=this.frameCount; i++){
 
-            this.textures.add(new Texture("character/BaseChara.png"));
-            //this.textures.add(new Texture("character/walk"+String.valuesOf(i)+".png");
+            //this.textures.add(new Texture("character/BaseChara.png"));
+            this.textures.add(new Texture("character/Walking/"+Integer.toString(i)+".png"));
             //il faut faire un dossier avec les animations de marche !!
         }
         this.maxFrameTime = cycleTime/this.frameCount;
