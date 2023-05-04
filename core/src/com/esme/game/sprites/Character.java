@@ -24,8 +24,8 @@ public class Character {
         this.position.add(this.fall);
         this.fall.scl(1/dt); //remet les bonnes coordonnées
 
-        if(this.position.y <97){ //pour qu'il soit sur le sol
-            this.position.y=97;
+        if(this.position.y <181){ //pour qu'il soit sur le sol
+            this.position.y=181;
             this.fall.y=0;
         }
 
