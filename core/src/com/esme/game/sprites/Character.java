@@ -15,7 +15,7 @@ public class Character {
         this.texture = new Texture("character/BaseChara.png");
         this.position = new Vector2(x,y);
         this.fall = new Vector2(0,0);
-        this.walking = new Animation(8,0.5f); //on a pas les différentes animations du sprite :eyes:
+        this.walking = new Animation(8,0.8f); //on a pas les différentes animations du sprite :eyes:
     }
 
     public void update(float dt){
@@ -33,8 +33,8 @@ public class Character {
             this.position.x=0;
         }
 
-        if(this.position.x>Constants.VIEWPORT_WIDTH-this.texture.getWidth()){
-            this.position.x=Constants.VIEWPORT_WIDTH-this.texture.getWidth();
+        if(this.position.x>3840-this.texture.getWidth()){
+            this.position.x=3840-this.texture.getWidth();
         }
 
         if(!Gdx.input.isKeyPressed(Input.Keys.LEFT)&& !Gdx.input.isKeyPressed(Input.Keys.RIGHT) && this.fall.y==0){
@@ -67,7 +67,7 @@ public class Character {
     public void jump(){
 
         if(this.fall.y==0){
-        this.fall.y = 1350;}
+        this.fall.y = 1150;}
     }
 
     public Texture getTexture(){
