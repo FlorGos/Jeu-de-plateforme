@@ -21,9 +21,9 @@ public class MainMenu extends GameState {
 
     public MainMenu(GameStateManager gsm) {
         super(gsm);
-        this.background = new Texture("bg.jpg"); //image à changer
-        this.ground = new Texture("bg_ground.png"); //image à changer
-        this.character = new Texture("character/BaseChara.png"); //image à changer
+        this.background = new Texture(Gdx.files.internal("bg.jpg")); //image à changer
+        this.ground = new Texture(Gdx.files.internal("bg_ground.png")); //image à changer
+        this.character = new Texture(Gdx.files.internal("data/character/basechara.png")); //image à changer
 
         this.generator = new FreeTypeFontGenerator(Gdx.files.internal("fs-gravity.ttf"));
         this.parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
@@ -84,7 +84,7 @@ public class MainMenu extends GameState {
     public void dispose() {
         this.background.dispose();
         this.ground.dispose();
-        this.character.dispose();
+       this.character.dispose();
         this.gameTitleText.dispose();
         this.touchText.dispose();
         this.toText.dispose();

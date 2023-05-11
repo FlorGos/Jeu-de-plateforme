@@ -22,8 +22,8 @@ public class PlayState extends GameState{
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
-        this.background = new Texture("bg.jpg");
-        this.ground = new Texture("bg_ground.png");
+        this.background = new Texture(Gdx.files.internal("bg.jpg"));
+        this.ground = new Texture(Gdx.files.internal("bg_ground.png"));
         this.character = new Character(Constants.VIEWPORT_WIDTH/2-128/2, this.ground.getHeight());
         //this.plateform = new Plateform(Constants.VIEWPORT_WIDTH/2, Constants.VIEWPORT_HEIGHT/2);
         /*this.platforms = new Array<Plateform>();

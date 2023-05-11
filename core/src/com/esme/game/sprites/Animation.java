@@ -1,5 +1,6 @@
 package com.esme.game.sprites;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Array;
 
@@ -14,7 +15,7 @@ public class Animation {
         for (int i=1; i<=this.frameCount; i++){
 
             //this.textures.add(new Texture("character/BaseChara.png"));
-            this.textures.add(new Texture("character/Walking/"+Integer.toString(i)+".png"));
+            this.textures.add(new Texture(Gdx.files.internal("data/character/Walking/"+Integer.toString(i)+".png")));
             //il faut faire un dossier avec les animations de marche !!
         }
         this.maxFrameTime = cycleTime/this.frameCount;

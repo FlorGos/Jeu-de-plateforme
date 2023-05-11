@@ -12,7 +12,7 @@ public class Character {
     private Animation walking;
 
     public Character(float x, float y){
-        this.texture = new Texture("character/BaseChara.png");
+        this.texture = new Texture(Gdx.files.internal("data/character/basechara.png"));
         this.position = new Vector2(x,y);
         this.fall = new Vector2(0,0);
         this.walking = new Animation(8,0.8f); //on a pas les différentes animations du sprite :eyes:
@@ -39,16 +39,16 @@ public class Character {
 
         if(!Gdx.input.isKeyPressed(Input.Keys.LEFT)&& !Gdx.input.isKeyPressed(Input.Keys.RIGHT) && this.fall.y==0){
             //si le personnage ne bouge pas, on lui remet sa texture de base
-            this.texture = new Texture("character/baseChara.png");
+            this.texture = new Texture(Gdx.files.internal("data/character/basechara.png"));
         }
 
         if(this.fall.y>0){
             //si le perso monte = saute
-            this.texture=new Texture("character/Jump.png");
+            this.texture=new Texture(Gdx.files.internal("data/character/Jump.png"));
         }
         if(this.fall.y<0){
             //si le perso chute
-            this.texture=new Texture("character/Fall.png");
+            this.texture=new Texture(Gdx.files.internal("data/character/Fall.png"));
         }
     }
 
