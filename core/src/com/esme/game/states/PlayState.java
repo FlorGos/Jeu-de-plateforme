@@ -16,6 +16,9 @@ public class PlayState extends GameState{
     private Texture background, ground, plateforms;
     private Character character;
     private Array<Plateform> platforms; //liste contenant des plateformes
+    //TODO 03 : Par manque de temps il n'y a qu'une seule plateforme dans le jeu. Sinon il faut remplacer
+    // l'instance de plateforme par une collection de plateforme.
+    private Plateform laPlateforme;
 
     private boolean backwards = false;
 
@@ -25,6 +28,9 @@ public class PlayState extends GameState{
         this.background = new Texture(Gdx.files.internal("bg.jpg"));
         this.ground = new Texture(Gdx.files.internal("bg_ground.png"));
         this.plateforms = new Texture(Gdx.files.internal("plateform.png"));
+        //TODO 02: Creer l'objet sprite.Plateform contenant la texture. A améliorer en créant plusieurs instances de plateforme
+        // et en les mettant dans la collection de plateforme.
+        this.laPlateforme = new Plateform(0);
         this.character = new Character(Constants.VIEWPORT_WIDTH/2-128/2, this.ground.getHeight());
         //this.plateform = new Plateform(Constants.VIEWPORT_WIDTH/2, Constants.VIEWPORT_HEIGHT/2);
         /*this.platforms = new Array<Plateform>();
@@ -70,8 +76,9 @@ public class PlayState extends GameState{
         sb.begin();
         sb.draw(this.background,0,0);
         sb.draw(this.ground,0,0);
+        // FIXME 01 : Remplacer l'affichage "this.plateforms" par l'affichage d'une liste de plateform (pas texture !)
         sb.draw(this.plateforms,250,250);
-        sb.draw(this.plateforms,750,250);
+        //sb.draw(this.plateforms,750,250);
 
         sb.draw(this.character.getTexture(), this.backwards?this.character.getPosition().x+this.character.getTexture().getWidth():this.character.getPosition().x, this.character.getPosition().y,this.backwards?-this.character.getTexture().getWidth():this.character.getTexture().getWidth(),this.character.getTexture().getHeight());
         //? fonctionne comme une condition if - traitement condition remplie : else condition non remplie
