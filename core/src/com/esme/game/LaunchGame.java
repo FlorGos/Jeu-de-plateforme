@@ -3,17 +3,14 @@ package com.esme.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.esme.game.managers.GameStateManager;
 import com.esme.game.states.MainMenu;
-import com.esme.game.states.Test;
 
 public class LaunchGame extends ApplicationAdapter {
 
 	private GameStateManager gsm;
-	private SpriteBatch sb;
+	public static SpriteBatch sb;
 
 	@Override
 	public void create () {
@@ -35,4 +32,6 @@ public class LaunchGame extends ApplicationAdapter {
 	public void dispose () {
 		this.sb.dispose();
 	}
+
+	//public SpriteBatch batch(){return this.sb;}
 }

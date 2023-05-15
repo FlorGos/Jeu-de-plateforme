@@ -6,12 +6,16 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.esme.game.utils.Constants;
 
+import javax.naming.ldap.Control;
+
 public class Character {
     private Texture texture;
     private Vector2 position, fall;
     private Animation walking;
+    Controller controller;
 
-    public Character(float x, float y){
+    public Character(float x, float y, Controller controller){
+        this.controller=controller;
         this.texture = new Texture(Gdx.files.internal("data/character/basechara.png"));
         this.position = new Vector2(x,y);
         this.fall = new Vector2(0,0);
@@ -37,7 +41,8 @@ public class Character {
             this.position.x=3840-this.texture.getWidth();
         }
 
-        if(!Gdx.input.isKeyPressed(Input.Keys.LEFT)&& !Gdx.input.isKeyPressed(Input.Keys.RIGHT) && this.fall.y==0){
+        if(!this.controller.isLeftPressed() && !this.controller.isRightPressed() && this.fall.y==0){
+            //!Gdx.input.isKeyPressed(Input.Keys.LEFT)&& !Gdx.input.isKeyPressed(Input.Keys.RIGHT)
             //si le personnage ne bouge pas, on lui remet sa texture de base
             this.texture = new Texture(Gdx.files.internal("data/character/basechara.png"));
         }
