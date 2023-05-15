@@ -1,6 +1,8 @@
 package com.esme.game.states;
 
+import com.badlogic.gdx.Audio;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
@@ -46,6 +48,9 @@ public class MainMenu extends GameState {
         this.toGlyph.setText(this.toText, "to");
         this.startGlyph.setText(this.startText, "start");
 
+        Music menuMusic = Gdx.audio.newMusic(Gdx.files.internal("data/bg_sound.ogg"));
+        menuMusic.setLooping(true);
+        menuMusic.play();
 
         this.cam.setToOrtho(false, Constants.VIEWPORT_WIDTH, Constants.VIEWPORT_HEIGHT); //centrer la position sur l'écran
         //(y augmente sur la hauteur si la souris monte - false, taille champ de vision)

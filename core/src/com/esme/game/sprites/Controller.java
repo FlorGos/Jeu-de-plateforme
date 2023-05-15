@@ -103,6 +103,4 @@ public class Controller {
     public boolean isLeftPressed(){
         return leftPressed;
     }
-
-    //resize ?
 }
