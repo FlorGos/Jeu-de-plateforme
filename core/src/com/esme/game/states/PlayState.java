@@ -38,11 +38,14 @@ public class PlayState extends GameState{
         // Le code suivant est presque bon mais il faut ajuster surtout la valeur X pour qu'elle permette la répartition des plateformes sur l'ecran.
         // this.plateform = new Plateform(Constants.VIEWPORT_WIDTH/2, Constants.VIEWPORT_HEIGHT/2);
         // 4 plateformes
-        for(int i=0; i<Constants.PLATEFORM_COUNT ; i++){
-            this.plateform = new Plateform(250,350);
-            this.plateform = new Plateform(350,400);
+        //for(int i=0; i<Constants.PLATEFORM_COUNT ; i++){
+            this.plateform = new Plateform(250,340);
             this.platforms.add(this.plateform);
-        }
+            this.plateform = new Plateform(1500,360);
+            this.platforms.add(this.plateform);
+            this.plateform = new Plateform(3000,360);
+            this.platforms.add(this.plateform);
+        //}
 
         this.cam.setToOrtho(false, Constants.VIEWPORT_WIDTH, Constants.VIEWPORT_HEIGHT);
     }
@@ -50,7 +53,14 @@ public class PlayState extends GameState{
     @Override
     protected void handleInput() {
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            if (this.plateform.estDessus(this.character.getPositionX(), this.character.getPositionY(), this.character.getLongueur(), this.character.getHauteur()))
+            boolean estSurUnePlateforme = false;
+            for(Plateform plateform : this.platforms) {
+                if (plateform.estDessus(this.character.getPositionX(), this.character.getPositionY(), this.character.getLongueur(), this.character.getHauteur()))
+                {
+                    estSurUnePlateforme = true;
+                }
+            }
+            if (estSurUnePlateforme)
             {
                 this.character.moveRight();
                 this.backwards = false;
@@ -66,6 +76,7 @@ public class PlayState extends GameState{
                     this.character.tombeDessous(hauteurATomber);
                     this.cam.position.set((this.character.getPosition().x + this.character.getTexture().getWidth() / 2), Constants.VIEWPORT_HEIGHT/2, 0);
                     this.cam.update();
+                    java.awt.Toolkit.getDefaultToolkit().beep();
                 }
                 else
                 {
@@ -78,7 +89,14 @@ public class PlayState extends GameState{
 
         }
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-            if (this.plateform.estDessus(this.character.getPositionX(), this.character.getPositionY(), this.character.getLongueur(), this.character.getHauteur()))
+            boolean estSurUnePlateforme = false;
+            for(Plateform plateform : this.platforms) {
+                if (plateform.estDessus(this.character.getPositionX(), this.character.getPositionY(), this.character.getLongueur(), this.character.getHauteur()))
+                {
+                    estSurUnePlateforme = true;
+                }
+            }
+            if (estSurUnePlateforme)
             {
                 this.character.moveLeft();
                 this.backwards=true;
@@ -94,6 +112,7 @@ public class PlayState extends GameState{
                     this.character.tombeDessous(hauteurATomber);
                     this.cam.position.set((this.character.getPosition().x + this.character.getTexture().getWidth() / 2), Constants.VIEWPORT_HEIGHT/2, 0);
                     this.cam.update();
+                    java.awt.Toolkit.getDefaultToolkit().beep();
                 }
                 else
                 {
@@ -108,7 +127,14 @@ public class PlayState extends GameState{
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
             this.character.jump();
             //FixMe Gestion a partir de la collection pour le saut
-            if (this.plateform.estDessous(this.character.getPositionX(), this.character.getPositionY(), this.character.getLongueur(), this.character.getHauteur() ))
+            boolean estSousUnePlateforme = false;
+            for(Plateform plateform : this.platforms) {
+                if (plateform.estDessous(this.character.getPositionX(), this.character.getPositionY(), this.character.getLongueur(), this.character.getHauteur()))
+                {
+                    estSousUnePlateforme = true;
+                }
+            }
+            if (estSousUnePlateforme)
             {
                 this.character.resteDessous(this.plateform.getPositionX() + this.plateform.getHauteur() );
                 this.cam.position.set((this.character.getPosition().x + this.character.getTexture().getWidth() / 2), Constants.VIEWPORT_HEIGHT/2, 0);
@@ -117,24 +143,28 @@ public class PlayState extends GameState{
             else
             {
                 System.out.println("Cherche a monter");
-                if (this.plateform.autoriseASauterDessus(this.character.getPositionX(), this.character.getPositionY(), this.character.getLongueur(), this.character.getHauteur() ))
-                {
-                    System.out.println("Cherche DOIT monter");
-                    float hauteurASauter = this.plateform.getPositionY();
-                    hauteurASauter -= 181;
-                    float epaisseurAPlateforme = this.plateform.getHauteur();
-                    hauteurASauter += epaisseurAPlateforme;
-                    this.character.monteDessus(hauteurASauter);
-                    this.cam.position.set((this.character.getPosition().x + this.character.getTexture().getWidth() / 2), Constants.VIEWPORT_HEIGHT/2, 0);
-                    this.cam.update();
+                boolean estAutoriseAMonter = false;
+                for(Plateform plateform : this.platforms) {
+                    if (plateform.autoriseASauterDessus(this.character.getPositionX(), this.character.getPositionY(), this.character.getLongueur(), this.character.getHauteur() ))
+                    {
+                        System.out.println("Cherche DOIT monter");
+                        float hauteurASauter = this.plateform.getPositionY();
+                        hauteurASauter -= 181;
+                        float epaisseurAPlateforme = this.plateform.getHauteur();
+                        hauteurASauter += epaisseurAPlateforme;
+                        this.character.monteDessus(hauteurASauter);
+                        estAutoriseAMonter = true;
+                        this.cam.position.set((this.character.getPosition().x + this.character.getTexture().getWidth() / 2), Constants.VIEWPORT_HEIGHT/2, 0);
+                        this.cam.update();
+
+                    }
                 }
-                else
+                if (!estAutoriseAMonter)
                 {
                     this.cam.position.set((this.character.getPosition().x + this.character.getTexture().getWidth() / 2), Constants.VIEWPORT_HEIGHT/2, 0);
                     this.cam.update();
                 }
             }
-
         }
     }
 
@@ -152,13 +182,14 @@ public class PlayState extends GameState{
         sb.draw(this.background,0,0);
         sb.draw(this.ground,0,0);
         // FIXME 01 : Remplacer l'affichage "this.plateforms" par l'affichage d'une liste de plateform (pas texture !)
-        sb.draw(this.plateform.getTexture(),this.plateform.getPositionX(),this.plateform.getPositionY());
+        //sb.draw(this.plateform.getTexture(),this.plateform.getPositionX(),this.plateform.getPositionY());
+
         //sb.draw(this.plateforms,750,250);
         //? fonctionne comme une condition if - traitement condition remplie : else condition non remplie
         //sb.draw(this.plateform.getTexture(),this.plateform.getPosition().x, this.plateform.getPosition().y);
-        /*for(Plateform plateform : this.platforms){
-            sb.draw(plateform.getTexture(), plateform.getPosition().x, plateform.getPosition().y);
-        }*/
+        for(Plateform plateform : this.platforms) {
+            sb.draw(plateform.getTexture(), plateform.getPositionX(), plateform.getPositionY());
+        }
         sb.draw(this.character.getTexture(), this.backwards?this.character.getPosition().x+this.character.getTexture().getWidth():this.character.getPosition().x, this.character.getPosition().y,this.backwards?-this.character.getTexture().getWidth():this.character.getTexture().getWidth(),this.character.getTexture().getHeight());
         sb.end();
     }
