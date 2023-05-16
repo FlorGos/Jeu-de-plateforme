@@ -12,9 +12,9 @@ import com.esme.game.utils.Constants;
 
 public class MainMenu extends GameState {
 
-    ///Ajout Floriane ///
-    private BodyDef bdef;
-    private FixtureDef fdef;
+    // FixMe 02 : Ajout Floriane supprime ///
+    //private BodyDef bdef;
+    //private FixtureDef fdef;
     ///Fin Ajout FLoriane///
     private Texture background, ground, character;
     private BitmapFont gameTitleText, touchText, toText, startText;
@@ -51,9 +51,9 @@ public class MainMenu extends GameState {
         this.toGlyph.setText(this.toText, "to");
         this.startGlyph.setText(this.startText, "start");
 
-        ///Ajout Floriane///
-        bdef = new BodyDef();
-        fdef = new = FixtureDef();
+        //FixMe 01  : Ajout Floriane : supprime
+        //bdef = new BodyDef();
+        //fdef = new = FixtureDef();
         ///Fin Ajout Floriane///
 
 
@@ -102,7 +102,7 @@ public class MainMenu extends GameState {
         this.generator.dispose();
     }
 
-    private class BodyDef {
+/*    private class BodyDef {
         for(int row =0; row>layer.getHeight(); row++)
         {for(int col=0; col< layer.getHeight()); col++}
         { if (cell ==null)continue;
@@ -125,5 +125,5 @@ public class MainMenu extends GameState {
     }
 
     private class FixtureDef {
-    }
+    }*/
 }

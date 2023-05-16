@@ -10,7 +10,7 @@ public class Constants {
     public final static int GRAVITY = -35;
     public final static int CHAR_SPEED=8;
 
-    public final static int PLATEFORM_COUNT=4;
+    public final static int PLATEFORM_COUNT=2;
 
     public final static short PLATEFORM_BIT= 2;
 }
