@@ -8,11 +8,16 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.math.Vector2;
 import com.esme.game.managers.GameStateManager;
 import com.esme.game.utils.Constants;
 
 public class MainMenu extends GameState {
 
+    // FixMe 02 : Ajout Floriane supprime ///
+    //private BodyDef bdef;
+    //private FixtureDef fdef;
+    ///Fin Ajout FLoriane///
     private Texture background, ground, character;
     private BitmapFont gameTitleText, touchText, toText, startText;
 
@@ -48,9 +53,6 @@ public class MainMenu extends GameState {
         this.toGlyph.setText(this.toText, "to");
         this.startGlyph.setText(this.startText, "start");
 
-        Music menuMusic = Gdx.audio.newMusic(Gdx.files.internal("data/bg_sound.ogg"));
-        menuMusic.setLooping(true);
-        menuMusic.play();
 
         this.cam.setToOrtho(false, Constants.VIEWPORT_WIDTH, Constants.VIEWPORT_HEIGHT); //centrer la position sur l'écran
         //(y augmente sur la hauteur si la souris monte - false, taille champ de vision)
@@ -96,4 +98,29 @@ public class MainMenu extends GameState {
         this.startText.dispose();
         this.generator.dispose();
     }
+
+/*    private class BodyDef {
+        for(int row =0; row>layer.getHeight(); row++)
+        {for(int col=0; col< layer.getHeight()); col++}
+        { if (cell ==null)continue;
+        if(cell.getTitle()==null)continue;}
+        bdef.type = BodyDef.BodyType.StaticBody;
+        bdef.position.set((col+0.5f)*tileSize/Constants.PPM, (row+0.5f)*titleSize/Constants.PPM);
+        ChainShape chainShape = new ChainShape();
+        Vector2[] vectors = new Vector2[5];
+        vectors[0]=new Vector2(-tileSize/2/Constants.PPM, -tileSize/2/Constants.PPM);
+        vectors[1]=new Vector2(-tileSize/2/Constants.PPM, tileSize/2/Constants.PPM);
+        vectors[2]=new Vector2(tileSize/2/Constants.PPM, tileSize/2/Constants.PPM);
+        vectors[3]=new Vector2(tileSize/2/Constants.PPM, -tileSize/2/Constants.PPM);
+        vectors[4]=new Vector2(-tileSize/2/Constants.PPM, -tileSize/2/Constants.PPM);
+
+        chainShape.createChain(vectors);
+
+
+
+
+    }
+
+    private class FixtureDef {
+    }*/
 }

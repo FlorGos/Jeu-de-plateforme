@@ -1,8 +1,10 @@
 package com.esme.game.states;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.esme.game.managers.GameStateManager;
 import com.esme.game.sprites.Controller;
@@ -15,6 +17,9 @@ public class PlayState extends GameState{
     private Texture background, ground;
     private Character character;
     private Array<Plateform> platforms; //liste contenant des plateformes
+    //TODO 03 : Par manque de temps il n'y a qu'une seule plateforme dans le jeu. Sinon il faut remplacer
+    // l'instance de plateforme par une collection de plateforme.
+    private Plateform plateform;
 
     private boolean backwards = false;
     Controller controller;
@@ -23,37 +28,32 @@ public class PlayState extends GameState{
         super(gsm);
         this.background = new Texture(Gdx.files.internal("bg.jpg"));
         this.ground = new Texture(Gdx.files.internal("bg_ground.png"));
-        this.controller = new Controller();
-
-        this.character = new Character(Constants.VIEWPORT_WIDTH/2-128/2, this.ground.getHeight(),this.controller);
+        this.character = new Character(Constants.VIEWPORT_WIDTH/2-128/2, this.ground.getHeight());
         //this.plateform = new Plateform(Constants.VIEWPORT_WIDTH/2, Constants.VIEWPORT_HEIGHT/2);
         /*this.platforms = new Array<Plateform>();
         for(int i=0; i<Constants.PLATEFORM_COUNT ; i++){
             this.platforms.add(new Plateform(i));
         }*/
+
         this.cam.setToOrtho(false, Constants.VIEWPORT_WIDTH, Constants.VIEWPORT_HEIGHT);
     }
 
     @Override
     protected void handleInput() {
-
-        if(controller.isRightPressed()){
-            //Gdx.input.isKeyPressed(Input.Keys.RIGHT)
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
             this.character.moveRight();
             this.backwards=false;
             this.cam.position.set((this.character.getPosition().x + this.character.getTexture().getWidth() / 2), Constants.VIEWPORT_HEIGHT/2, 0);
             this.cam.update();
         }
-        if(controller.isLeftPressed()){
-            //Gdx.input.isKeyPressed(Input.Keys.LEFT)
+        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
             this.character.moveLeft();
             this.backwards=true;
             this.cam.position.set((this.character.getPosition().x + this.character.getTexture().getWidth() / 2), Constants.VIEWPORT_HEIGHT/2, 0);
             this.cam.update();
         }
 
-        if(controller.isUpPressed()){
-            //Gdx.input.isKeyJustPressed(Input.Keys.SPACE)
+        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
             this.character.jump();
             this.cam.position.set((this.character.getPosition().x + this.character.getTexture().getWidth() / 2), Constants.VIEWPORT_HEIGHT/2, 0);
             this.cam.update();
@@ -73,6 +73,7 @@ public class PlayState extends GameState{
         sb.begin();
         sb.draw(this.background,0,0);
         sb.draw(this.ground,0,0);
+
         sb.draw(this.character.getTexture(), this.backwards?this.character.getPosition().x+this.character.getTexture().getWidth():this.character.getPosition().x, this.character.getPosition().y,this.backwards?-this.character.getTexture().getWidth():this.character.getTexture().getWidth(),this.character.getTexture().getHeight());
         //? fonctionne comme une condition if - traitement condition remplie : else condition non remplie
 
