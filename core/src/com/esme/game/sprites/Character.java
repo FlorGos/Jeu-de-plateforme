@@ -28,6 +28,7 @@ public class Character extends Forme {
      * Affichage du personnage
      */
     private Animation walking;
+    private Vector2 fall;
     Controller controller;
 
     public Character(float x, float y, Controller controller){
@@ -37,7 +38,7 @@ public class Character extends Forme {
     /**
      * Pour l'affichage du personnage en cas de chute.
      */
-    private Vector2 fall;
+
 
     /**
      * Constructeur
